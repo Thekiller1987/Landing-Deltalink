@@ -1,10 +1,8 @@
-/* Archivo: scripts.js (Landing Page) - CORREGIDO PARA ENVIAR LA ACCIÓN */
+/* Archivo: scripts.js (Landing Page) - CON VALIDACIÓN DE TELÉFONO MEJORADA */
 
 // =======================================================
 // 1. CONFIGURACIÓN DEL FORMULARIO Y API UNIFICADA
 // =======================================================
-
-// 🌟 URL DE API UNIFICADA DEL USUARIO (¡LISTA PARA USAR!) 🌟
 const GOOGLE_SCRIPT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbx8yPloexKjU6mEXyJR5YxgAoMKdvYrekWVxtm1aGqHOAHxg3IjnIGRJAkiKfoCR2XUUg/exec'; 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -40,33 +38,63 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ------------------------------------
-    // Lógica de Validación Específica del Teléfono
+    // Lógica de Validación Específica del Teléfono (NUEVA MÁSCARA)
     // ------------------------------------
     if (telefonoInput) {
         telefonoInput.addEventListener('input', (e) => {
-            let value = e.target.value;
-            value = value.replace(/[^0-9+]/g, '');
-            if (value.startsWith('+')) {
-                value = '+' + value.substring(1).replace(/\+/g, '');
+            let input = e.target;
+            let value = input.value;
+
+            // 1. Limpiar el input de todo excepto números y un '+' al inicio
+            let cleaned = value.replace(/[^0-9+]/g, '');
+            if (cleaned.startsWith('+')) {
+                // Si empieza con '+', quitar todos los '+' adicionales
+                cleaned = '+' + cleaned.substring(1).replace(/\+/g, '');
             } else {
-                 value = value.replace(/\+/g, '');
+                // Si no empieza con '+', quitar todos los '+'
+                cleaned = cleaned.replace(/\+/g, '');
             }
-            e.target.value = value;
+
+            let formatted = '';
+            
+            // 2. Aplicar formato +505
+            if (cleaned.startsWith('+505')) {
+                formatted = '+505';
+                if (cleaned.length > 4) {
+                    // Añadir espacio y limitar a 8 dígitos
+                    formatted += ' ' + cleaned.substring(4, 12);
+                }
+            } 
+            // 3. Manejar números locales (8 dígitos)
+            else if (!cleaned.startsWith('+') && cleaned.length > 0) {
+                formatted = cleaned.substring(0, 8); // Limitar a 8 dígitos
+            } 
+            // 4. Manejar otros códigos internacionales
+            else {
+                formatted = cleaned.substring(0, 16); // Límite genérico
+            }
+
+            input.value = formatted;
         });
     }
 
 
     // ------------------------------------
-    // Envío del Formulario (¡AQUÍ ESTÁ LA CORRECCIÓN!)
+    // Envío del Formulario
     // ------------------------------------
     if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
+            // 3. Validación final antes de enviar
             if (telefonoInput && !telefonoInput.checkValidity()) {
-                formMessage.textContent = 'Por favor, revise el formato del teléfono.';
-                formMessage.classList.add('error');
-                setTimeout(() => formMessage.classList.remove('error'), 3000);
+                formMessage.textContent = 'Formato de teléfono inválido. Use 8 dígitos, o +505 88887777, o un código de país.';
+                formMessage.className = 'form-message error visible';
+                formMessage.style.display = 'block';
+                setTimeout(() => {
+                    formMessage.classList.remove('visible');
+                    setTimeout(() => formMessage.style.display = 'none', 300);
+                }, 4000);
                 return;
             }
 
@@ -78,50 +106,51 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
             
-            // ⬇️⬇️⬇️ ¡CORRECCIÓN CRÍTICA! ⬇️⬇️⬇️
-            // Añadimos la acción que la API (Código.gs) espera.
             data.action = 'submit_lead';
 
             try {
-                // Usamos 'cors' porque la API Unificada sí devuelve JSON.
-                // 'no-cors' era para el script simple.
                 const response = await fetch(GOOGLE_SCRIPT_ENDPOINT, {
                     method: 'POST',
-                    mode: 'cors', // Cambiado a 'cors'
+                    mode: 'cors', 
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                     body: new URLSearchParams(data).toString()
                 });
 
-                // Leemos la respuesta de la API
                 const result = await response.json();
 
                 if (result.success) {
-                    formMessage.textContent = '¡Mensaje enviado con éxito! Le contactaremos pronto.';
-                    formMessage.classList.add('success');
+                    showMessage('form-message', '¡Mensaje enviado con éxito! Le contactaremos pronto.', 'success');
                     form.reset(); 
                 } else {
-                    // Muestra el error de la API (ej: "Faltan datos requeridos")
-                    formMessage.textContent = result.message || 'Error al enviar el formulario.';
-                    formMessage.classList.add('error');
+                    showMessage('form-message', result.message || 'Error al enviar el formulario.', 'error');
                 }
 
             } catch (error) {
                 console.error('Error de red o CORS al enviar el formulario:', error);
-                formMessage.textContent = 'Hubo un error de conexión. Por favor, intente de nuevo o use el correo.';
-                formMessage.classList.add('error');
+                showMessage('form-message', 'Hubo un error de conexión. Por favor, intente de nuevo o use el correo.', 'error');
             } finally {
                 setTimeout(() => {
                     submitButton.textContent = 'Enviar Solicitud';
                     submitButton.disabled = false;
-                    setTimeout(() => {
-                         formMessage.classList.remove('success', 'error');
-                         formMessage.textContent = '';
-                    }, 3000);
                 }, 500);
             }
         });
+    }
+
+    // Función de utilidad para mensajes
+    function showMessage(elementId, message, type) {
+        const el = document.getElementById(elementId);
+        if (!el) return;
+        el.textContent = message;
+        el.className = `message-box ${type} visible`;
+        el.style.display = 'block';
+        
+        setTimeout(() => {
+            el.classList.remove('visible');
+            setTimeout(() => el.style.display = 'none', 300);
+        }, 5000);
     }
 
     // =======================================================
@@ -133,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let slideInterval;
 
     function showSlide(index) {
-        if (slides.length === 0) return; // Evitar errores si no hay slides
+        if (slides.length === 0) return; 
 
         if (index >= slides.length) {
             index = 0;
