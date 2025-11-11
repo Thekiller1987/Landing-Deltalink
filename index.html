@@ -1,224 +1,218 @@
-/* Archivo: scripts.js (Landing Page) - CON VALIDACIÓN DE TELÉFONO MEJORADA */
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DELTALINK - Su Socio Tecnológico Estratégico | Ciberseguridad y Crecimiento Inteligente</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
 
-// =======================================================
-// 1. CONFIGURACIÓN DEL FORMULARIO Y API UNIFICADA
-// =======================================================
-const GOOGLE_SCRIPT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbx8yPloexKjU6mEXyJR5YxgAoMKdvYrekWVxtm1aGqHOAHxg3IjnIGRJAkiKfoCR2XUUg/exec'; 
+    <header class="main-header" id="main-header">
+        <div class="logo-placeholder">
+            <img src="logo.png" alt="Logo DELTALINK" class="logo-img">
+        </div>
+        <nav>
+            <a href="#home">Inicio</a>
+            <a href="#solucion">Nuestra Solución</a>
+            <a href="#valor">Valor Diferencial</a>
+            <a href="#testimonios">Testimonios</a>
+            <a href="#contacto" class="contact-btn">Contáctenos</a>
+        </nav>
+        <button class="hamburger-menu" aria-label="Abrir menú">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </header>
 
-document.addEventListener('DOMContentLoaded', () => {
-    // ------------------------------------
-    // Elementos del DOM
-    // ------------------------------------
-    const form = document.getElementById('contact-form');
-    const formMessage = document.getElementById('form-message');
-    const submitButton = form ? form.querySelector('.submit-btn') : null;
-    const telefonoInput = document.getElementById('telefono');
-    const mainNav = document.querySelector('nav');
-    const hamburgerBtn = document.querySelector('.hamburger-menu');
+    <section class="hero-section" id="home">
+        <div class="hero-content">
+            <h1 class="animated-headline" data-aos="fade-up"><strong>DELTALINK:</strong> Ciberseguridad Robusta y Crecimiento Inteligente.</h1>
+            <p class="animated-subtitle" data-aos="fade-up" data-aos-delay="200">Su Socio Tecnológico Integral para la <strong>Transformación Digital</strong> sin riesgos.</p>
+            <p class="animated-text" data-aos="fade-up" data-aos-delay="400">Desde Software a Medida hasta Infraestructura Llave en Mano y Continuidad del Negocio.</p>
+            <a href="#contacto" class="cta-button" data-aos="zoom-in" data-aos-delay="600">Transforme su Negocio Ahora</a>
+        </div>
+        <div class="animated-bg"></div>
+    </section>
 
-    // ------------------------------------
-    // Funcionalidad del Menú Hamburguesa
-    // ------------------------------------
-    function closeMobileMenu() {
-        if (mainNav && hamburgerBtn) {
-            mainNav.classList.remove('active');
-            hamburgerBtn.classList.remove('active');
-        }
-    }
+    <section class="integrated-solution-section" id="solucion">
+        <h2 data-aos="fade-up">Nuestra Plataforma Tecnológica Integral</h2>
+        <div class="solution-grid">
+            <div class="solution-item" data-aos="fade-right" data-aos-delay="100">
+                <i class="fas fa-cubes icon-large"></i>
+                <h3>Software Inteligente y Seguro</h3>
+                <p>Diseñamos y desarrollamos <strong>sistemas de gestión (ERP, CRM, POS)</strong> y plataformas web profesionales a la medida. Automatizamos sus procesos críticos y blindamos su información con la metodología <strong>DevSecOps</strong>, garantizando software robusto desde su concepción.</p>
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Software a medida seguro" class="solution-img">
+            </div>
+            <div class="solution-item" data-aos="fade-left" data-aos-delay="200">
+                <i class="fas fa-network-wired icon-large"></i>
+                <h3>Infraestructura y Continuidad del Negocio</h3>
+                <p>Proveemos, instalamos y mantenemos toda la infraestructura física y virtual: <strong>servidores de alto rendimiento, equipos de cómputo, redes optimizadas y soluciones en la nube</strong>. Nuestro <strong>Mantenimiento Preventivo Proactivo</strong> asegura el máximo rendimiento y minimiza el riesgo operativo, garantizando la continuidad de su negocio.</p>
+                <img src="https://images.unsplash.com/photo-1544197152-64673b5a7114?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Infraestructura IT y continuidad" class="solution-img">
+            </div>
+        </div>
+    </section>
 
-    if (hamburgerBtn && mainNav) {
-        hamburgerBtn.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-            hamburgerBtn.classList.toggle('active');
-        });
+    <section class="differential-value-section" id="valor">
+        <h2 data-aos="fade-up">Nuestro Valor Diferencial: La Ventaja DELTALINK</h2>
+        <div class="value-carousel-container">
+            <div class="carousel-slide active" data-index="0" data-aos="fade-up">
+                <i class="fas fa-handshake-alt-slash icon-large"></i>
+                <h3>Implementación Llave en Mano</h3>
+                <p>Olvide la complejidad de gestionar múltiples proveedores. <strong>DELTALINK es su único punto de contacto</strong>. Desde la consultoría inicial hasta la instalación de hardware, el despliegue de software y la capacitación, le entregamos soluciones <strong>completamente funcionales y listas para operar</strong>.</p>
+            </div>
+            <div class="carousel-slide" data-index="1" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-shield-alt icon-large"></i>
+                <h3>Ciberseguridad como Eje Central (DevSecOps)</h3>
+                <p>La seguridad no es un añadido, es nuestra <strong>filosofía fundamental</strong>. Aplicamos <strong>DevSecOps</strong> para blindar sus sistemas y sitios web desde el código fuente, eliminando vulnerabilidades y protegiendo sus activos digitales contra las amenazas más sofisticadas. Su negocio, <strong>totalmente protegido</strong>.</p>
+            </div>
+            <div class="carousel-slide" data-index="2" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-chart-line icon-large"></i>
+                <h3>Ingreso Recurrente y Crecimiento Sostenible</h3>
+                <p>Construimos relaciones a largo plazo. A través de nuestros planes de <strong>Mantenimiento Preventivo Proactivo</strong> y servicios de hosting en la nube ($12 USD/mes), garantizamos la <strong>continuidad y optimización</strong> de su negocio, permitiéndole un crecimiento constante y sin interrupciones.</p>
+            </div>
+        </div>
+        <div class="carousel-dots">
+            <span class="dot active" data-slide="0"></span>
+            <span class="dot" data-slide="1"></span>
+            <span class="dot" data-slide="2"></span>
+        </div>
+    </section>
+
+    <section class="mission-vision-section">
+        <h2 data-aos="fade-up">Nuestra Misión y Visión</h2>
+        <div class="mv-container">
+            <div class="mv-card" data-aos="flip-left">
+                <i class="fas fa-bullseye"></i>
+                <h4>Misión</h4>
+                <p>Empoderar a las empresas e instituciones nicaragüenses con soluciones tecnológicas integrales y seguras, garantizando eficiencia, protección de activos digitales y continuidad del negocio para impulsar su crecimiento inteligente.</p>
+            </div>
+            <div class="mv-card" data-aos="flip-right" data-aos-delay="200">
+                <i class="fas fa-rocket"></i>
+                <h4>Visión</h4>
+                <p>Ser la empresa de tecnología referente en Centroamérica, liderando la transformación digital y estableciendo los estándares más altos de ciberseguridad, calidad y soporte integral en la región.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section" id="testimonios">
+        <h2 data-aos="fade-up">Lo Que Dicen Nuestros Clientes</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card" data-aos="zoom-in" data-aos-delay="100">
+                <p>"DELTALINK ha transformado nuestra operación. Su software a medida es intuitivo y la seguridad es impecable. ¡Un verdadero socio estratégico!"</p>
+                <h4>— Gerente de Operaciones, Agroindustria X</h4>
+            </div>
+            <div class="testimonial-card" data-aos="zoom-in" data-aos-delay="300">
+                <p>"La implementación de nuestra nueva infraestructura fue perfecta. Cero interrupciones y un soporte técnico inigualable. Los recomendamos ampliamente."</p>
+                <h4>— Director General, Cadena de Tiendas Z</h4>
+            </div>
+            <div class="testimonial-card" data-aos="zoom-in" data-aos-delay="500">
+                <p>"Finalmente, una empresa que entiende la ciberseguridad desde la raíz. Nos sentimos completamente seguros y enfocados en crecer."</p>
+                <h4>— CTO, Fintech Solutions Y</h4>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-banner">
+        <h2 data-aos="fade-right">¿Listo para un Futuro Tecnológico Seguro?</h2>
+        <p data-aos="fade-left" data-aos-delay="200">Deje que DELTALINK impulse el crecimiento inteligente de su empresa.</p>
+        <a href="#contacto" class="cta-button" data-aos="zoom-in" data-aos-delay="400">Solicitar Consultoría Gratuita</a>
+    </section>
+
+    <section class="contact-section" id="contacto">
+        <h2 data-aos="fade-up">Contáctenos y Transformemos su Tecnología</h2>
+        <p class="contact-intro" data-aos="fade-up" data-aos-delay="100">Estamos listos para ser su único punto de contacto tecnológico en Nicaragua.</p>
+        <div class="contact-details-grid">
+            <div class="contact-item" data-aos="fade-right" data-aos-delay="200">
+                <i class="fas fa-envelope"></i>
+                <h3>Correo Electrónico</h3>
+                <p>Deltalink505@outlook.com</p>
+            </div>
+            <div class="contact-item" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-phone-alt"></i>
+                <h3>Teléfono</h3>
+                <p>+505 5850 6295</p>
+            </div>
+            <div class="contact-item" data-aos="fade-left" data-aos-delay="400">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Ubicación</h3>
+                <p>Juigalpa, Chontales, Nicaragua</p>
+            </div>
+        </div>
         
-        mainNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', closeMobileMenu);
-        });
-    }
-
-    // ------------------------------------
-    // Lógica de Validación Específica del Teléfono (NUEVA MÁSCARA)
-    // ------------------------------------
-    if (telefonoInput) {
-        telefonoInput.addEventListener('input', (e) => {
-            let input = e.target;
-            let value = input.value;
-
-            // 1. Limpiar el input de todo excepto números y un '+' al inicio
-            let cleaned = value.replace(/[^0-9+]/g, '');
-            if (cleaned.startsWith('+')) {
-                // Si empieza con '+', quitar todos los '+' adicionales
-                cleaned = '+' + cleaned.substring(1).replace(/\+/g, '');
-            } else {
-                // Si no empieza con '+', quitar todos los '+'
-                cleaned = cleaned.replace(/\+/g, '');
-            }
-
-            let formatted = '';
-            
-            // 2. Aplicar formato +505 (Añade el espacio)
-            if (cleaned.startsWith('+505')) {
-                formatted = '+505';
-                if (cleaned.length > 4) {
-                    // Añadir espacio y limitar a 8 dígitos después
-                    formatted += ' ' + cleaned.substring(4, 12);
-                }
-            } 
-            // 3. Manejar números locales (8 dígitos)
-            else if (!cleaned.startsWith('+') && cleaned.length > 0) {
-                formatted = cleaned.substring(0, 8); // Limitar a 8 dígitos
-            } 
-            // 4. Manejar otros códigos internacionales
-            else {
-                formatted = cleaned.substring(0, 16); // Límite genérico
-            }
-
-            input.value = formatted;
-        });
-    }
-
-
-    // ------------------------------------
-    // Envío del Formulario
-    // ------------------------------------
-    if (form) {
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            // 3. Validación final antes de enviar
-            if (telefonoInput && !telefonoInput.checkValidity()) {
-                // El 'title' del HTML se mostrará automáticamente
-                // Pero añadimos un mensaje extra
-                showMessage('form-message', 'Formato de teléfono inválido. Revise el campo.', 'error');
-                return;
-            }
-
-            submitButton.textContent = 'Enviando...';
-            submitButton.disabled = true;
-            formMessage.textContent = '';
-            formMessage.className = 'form-message'; 
-
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
-            
-            data.action = 'submit_lead';
-
-            try {
-                const response = await fetch(GOOGLE_SCRIPT_ENDPOINT, {
-                    method: 'POST',
-                    mode: 'cors', 
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: new URLSearchParams(data).toString()
-                });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    showMessage('form-message', '¡Mensaje enviado con éxito! Le contactaremos pronto.', 'success');
-                    form.reset(); 
-                } else {
-                    showMessage('form-message', result.message || 'Error al enviar el formulario.', 'error');
-                }
-
-            } catch (error) {
-                console.error('Error de red o CORS al enviar el formulario:', error);
-                showMessage('form-message', 'Hubo un error de conexión. Por favor, intente de nuevo o use el correo.', 'error');
-            } finally {
-                setTimeout(() => {
-                    submitButton.textContent = 'Enviar Solicitud';
-                    submitButton.disabled = false;
-                }, 500);
-            }
-        });
-    }
-
-    // Función de utilidad para mensajes
-    function showMessage(elementId, message, type) {
-        const el = document.getElementById(elementId);
-        if (!el) return;
-        el.textContent = message;
-        el.className = `message-box ${type} visible`;
-        el.style.display = 'block';
-        
-        setTimeout(() => {
-            el.classList.remove('visible');
-            setTimeout(() => el.style.display = 'none', 300);
-        }, 5000);
-    }
-
-    // =======================================================
-    // 3. LÓGICA DEL CARRUSEL DE VALOR DIFERENCIAL 
-    // =======================================================
-    const slides = document.querySelectorAll('.value-carousel-container .carousel-slide');
-    const dots = document.querySelectorAll('.carousel-dots .dot');
-    let currentSlide = 0;
-    let slideInterval;
-
-    function showSlide(index) {
-        if (slides.length === 0) return; 
-
-        if (index >= slides.length) {
-            index = 0;
-        } else if (index < 0) {
-            index = slides.length - 1;
-        }
-
-        slides.forEach((slide, i) => {
-             slide.classList.remove('active');
-             slide.style.transform = `translateX(${(i - index) * 100}%)`;
-        });
-        
-        dots.forEach(dot => dot.classList.remove('active'));
-
-        slides[index].classList.add('active');
-        slides[index].style.transform = `translateX(0)`;
-        dots[index].classList.add('active');
-        currentSlide = index;
-    }
-
-    function nextSlide() {
-        showSlide(currentSlide + 1);
-    }
-
-    function startSlideShow() {
-        clearInterval(slideInterval); 
-        slideInterval = setInterval(nextSlide, 7000); 
-    }
+  <form id="contact-form" class="contact-form" data-aos="zoom-in" data-aos-delay="500">
+    <input type="text" name="nombre" placeholder="Nombre" required>
+    <input type="text" name="empresa" placeholder="Empresa o Institución para la que trabaja" required>
     
-    if (slides.length > 0) {
-        showSlide(0); 
-        startSlideShow(); 
+    <input type="email" name="email" placeholder="Correo Electrónico" required>
+    
+  <input 
+    type="tel" 
+    name="telefono" 
+    placeholder="+505 88887777" 
+    required
+    pattern="^\+505 \d{8}$" 
+    title="El formato debe ser: +505 seguido de un espacio y 8 dígitos."
+    maxlength="13" 
+    id="telefono"
+>
+    
+    <textarea name="mensaje" placeholder="Describa brevemente su necesidad (Software a medida, Soporte de Infraestructura, Ciberseguridad, etc.)" required></textarea>
+    <button type="submit" class="submit-btn">Enviar Solicitud</button>
+    <div id="form-message" class="form-message"></div>
+</form>
+    </section>
 
-        dots.forEach(dot => {
-            dot.addEventListener('click', () => {
-                const index = parseInt(dot.getAttribute('data-slide'));
-                showSlide(index);
-                startSlideShow(); 
-            });
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="logo.png" alt="Logo DELTALINK">
+                <p>Socio Tecnológico Integral y Seguro.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Enlaces Rápidos</h4>
+                <ul>
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#solucion">Nuestra Solución</a></li>
+                    <li><a href="#valor">Valor Diferencial</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
+                    <li><a href="#contacto">Contáctenos</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Síganos</h4>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter-square"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 DELTALINK. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1200, 
+            once: true,    
+            mirror: false, 
         });
 
-        const carouselContainer = document.querySelector('.value-carousel-container');
-        if (carouselContainer) {
-            carouselContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
-            carouselContainer.addEventListener('mouseleave', startSlideShow);
-        }
-    }
-
-
-    // =======================================================
-    // 4. EFECTO STICKY HEADER CON SOMBRA
-    // =======================================================
-    const header = document.getElementById('main-header');
-    if (header) {
+        // Sticky Header con sombra
         window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) { 
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
             }
         });
-    }
-});
+    </script>
+</body>
+</html>

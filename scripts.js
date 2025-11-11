@@ -1,8 +1,10 @@
-/* Archivo: scripts.js (Landing Page) - CON VALIDACIÓN DE TELÉFONO MEJORADA */
+/* Archivo: scripts.js (Landing Page) - CORREGIDO PARA ENVIAR LA ACCIÓN */
 
 // =======================================================
 // 1. CONFIGURACIÓN DEL FORMULARIO Y API UNIFICADA
 // =======================================================
+
+// 🌟 URL DE API UNIFICADA DEL USUARIO (¡LISTA PARA USAR!) 🌟
 const GOOGLE_SCRIPT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbx8yPloexKjU6mEXyJR5YxgAoMKdvYrekWVxtm1aGqHOAHxg3IjnIGRJAkiKfoCR2XUUg/exec'; 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -38,59 +40,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ------------------------------------
-    // Lógica de Validación Específica del Teléfono (NUEVA MÁSCARA)
+    // Lógica de Validación Específica del Teléfono
     // ------------------------------------
     if (telefonoInput) {
-        telefonoInput.addEventListener('input', (e) => {
-            let input = e.target;
-            let value = input.value;
+        telefonoInput.addEventListener('input', (e) => {
+            let value = e.target.value;
 
-            // 1. Limpiar el input de todo excepto números y un '+' al inicio
-            let cleaned = value.replace(/[^0-9+]/g, '');
-            if (cleaned.startsWith('+')) {
-                // Si empieza con '+', quitar todos los '+' adicionales
-                cleaned = '+' + cleaned.substring(1).replace(/\+/g, '');
-            } else {
-                // Si no empieza con '+', quitar todos los '+'
-                cleaned = cleaned.replace(/\+/g, '');
-            }
+            // ---- ¡CAMBIO AQUÍ! ----
+            // Permitimos números, el signo '+' y el espacio
+            value = value.replace(/[^0-9+ ]/g, ''); // <--- ESTA ES LA LÍNEA NUEVA
 
-            let formatted = '';
-            
-            // 2. Aplicar formato +505 (Añade el espacio)
-            if (cleaned.startsWith('+505')) {
-                formatted = '+505';
-                if (cleaned.length > 4) {
-                    // Añadir espacio y limitar a 8 dígitos después
-                    formatted += ' ' + cleaned.substring(4, 12);
-                }
-            } 
-            // 3. Manejar números locales (8 dígitos)
-            else if (!cleaned.startsWith('+') && cleaned.length > 0) {
-                formatted = cleaned.substring(0, 8); // Limitar a 8 dígitos
-            } 
-            // 4. Manejar otros códigos internacionales
-            else {
-                formatted = cleaned.substring(0, 16); // Límite genérico
-            }
-
-            input.value = formatted;
-        });
-    }
+            if (value.startsWith('+')) {
+                value = '+' + value.substring(1).replace(/\+/g, '');
+            } else {
+                 value = value.replace(/\+/g, '');
+            }
+            e.target.value = value;
+        });
+    }
 
 
     // ------------------------------------
-    // Envío del Formulario
+    // Envío del Formulario (¡AQUÍ ESTÁ LA CORRECCIÓN!)
     // ------------------------------------
     if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // 3. Validación final antes de enviar
             if (telefonoInput && !telefonoInput.checkValidity()) {
-                // El 'title' del HTML se mostrará automáticamente
-                // Pero añadimos un mensaje extra
-                showMessage('form-message', 'Formato de teléfono inválido. Revise el campo.', 'error');
+                formMessage.textContent = 'Por favor, revise el formato del teléfono.';
+                formMessage.classList.add('error');
+                setTimeout(() => formMessage.classList.remove('error'), 3000);
                 return;
             }
 
@@ -102,51 +82,50 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
             
+            // ⬇️⬇️⬇️ ¡CORRECCIÓN CRÍTICA! ⬇️⬇️⬇️
+            // Añadimos la acción que la API (Código.gs) espera.
             data.action = 'submit_lead';
 
             try {
+                // Usamos 'cors' porque la API Unificada sí devuelve JSON.
+                // 'no-cors' era para el script simple.
                 const response = await fetch(GOOGLE_SCRIPT_ENDPOINT, {
                     method: 'POST',
-                    mode: 'cors', 
+                    mode: 'cors', // Cambiado a 'cors'
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                     body: new URLSearchParams(data).toString()
                 });
 
+                // Leemos la respuesta de la API
                 const result = await response.json();
 
                 if (result.success) {
-                    showMessage('form-message', '¡Mensaje enviado con éxito! Le contactaremos pronto.', 'success');
+                    formMessage.textContent = '¡Mensaje enviado con éxito! Le contactaremos pronto.';
+                    formMessage.classList.add('success');
                     form.reset(); 
                 } else {
-                    showMessage('form-message', result.message || 'Error al enviar el formulario.', 'error');
+                    // Muestra el error de la API (ej: "Faltan datos requeridos")
+                    formMessage.textContent = result.message || 'Error al enviar el formulario.';
+                    formMessage.classList.add('error');
                 }
 
             } catch (error) {
                 console.error('Error de red o CORS al enviar el formulario:', error);
-                showMessage('form-message', 'Hubo un error de conexión. Por favor, intente de nuevo o use el correo.', 'error');
+                formMessage.textContent = 'Hubo un error de conexión. Por favor, intente de nuevo o use el correo.';
+                formMessage.classList.add('error');
             } finally {
                 setTimeout(() => {
                     submitButton.textContent = 'Enviar Solicitud';
                     submitButton.disabled = false;
+                    setTimeout(() => {
+                         formMessage.classList.remove('success', 'error');
+                         formMessage.textContent = '';
+                    }, 3000);
                 }, 500);
             }
         });
-    }
-
-    // Función de utilidad para mensajes
-    function showMessage(elementId, message, type) {
-        const el = document.getElementById(elementId);
-        if (!el) return;
-        el.textContent = message;
-        el.className = `message-box ${type} visible`;
-        el.style.display = 'block';
-        
-        setTimeout(() => {
-            el.classList.remove('visible');
-            setTimeout(() => el.style.display = 'none', 300);
-        }, 5000);
     }
 
     // =======================================================
@@ -158,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let slideInterval;
 
     function showSlide(index) {
-        if (slides.length === 0) return; 
+        if (slides.length === 0) return; // Evitar errores si no hay slides
 
         if (index >= slides.length) {
             index = 0;
