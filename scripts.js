@@ -1,10 +1,10 @@
-/* Archivo: scripts.js (Landing Page) - CORREGIDO PARA ENVIAR LA ACCIÓN */
+/* Archivo: scripts.js (Landing Page DELTALINK) */
 
 // =======================================================
 // 1. CONFIGURACIÓN DEL FORMULARIO Y API UNIFICADA
 // =======================================================
 
-// 🌟 URL DE API UNIFICADA DEL USUARIO (¡LISTA PARA USAR!) 🌟
+// 🌟 URL DE API UNIFICADA (Google Apps Script) 🌟
 const GOOGLE_SCRIPT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbx8yPloexKjU6mEXyJR5YxgAoMKdvYrekWVxtm1aGqHOAHxg3IjnIGRJAkiKfoCR2XUUg/exec'; 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -40,37 +40,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ------------------------------------
-    // Lógica de Validación Específica del Teléfono
+    // Lógica de Validación Específica del Teléfono (+505 88887777)
     // ------------------------------------
     if (telefonoInput) {
-        telefonoInput.addEventListener('input', (e) => {
-            let value = e.target.value;
+        telefonoInput.addEventListener('input', (e) => {
+            let value = e.target.value;
 
-            // ---- ¡CAMBIO AQUÍ! ----
             // Permitimos números, el signo '+' y el espacio
-            value = value.replace(/[^0-9+ ]/g, ''); // <--- ESTA ES LA LÍNEA NUEVA
+            value = value.replace(/[^0-9+ ]/g, ''); 
 
-            if (value.startsWith('+')) {
-                value = '+' + value.substring(1).replace(/\+/g, '');
-            } else {
-                 value = value.replace(/\+/g, '');
-            }
-            e.target.value = value;
-        });
-    }
+            if (value.startsWith('+')) {
+                // Asegura que solo haya un '+' al inicio
+                value = '+' + value.substring(1).replace(/\+/g, '');
+            } else {
+                // Elimina '+' si no está al inicio
+                value = value.replace(/\+/g, '');
+            }
+            e.target.value = value;
+        });
+    }
 
 
     // ------------------------------------
-    // Envío del Formulario (¡AQUÍ ESTÁ LA CORRECCIÓN!)
+    // Envío del Formulario (Conexión con Google Script)
     // ------------------------------------
     if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
+            // Valida usando el 'pattern' del HTML
             if (telefonoInput && !telefonoInput.checkValidity()) {
-                formMessage.textContent = 'Por favor, revise el formato del teléfono.';
-                formMessage.classList.add('error');
-                setTimeout(() => formMessage.classList.remove('error'), 3000);
+                formMessage.textContent = telefonoInput.title; // Muestra el mensaje de error del HTML
+                formMessage.className = 'form-message error';
+                
+                setTimeout(() => {
+                   formMessage.textContent = '';
+                   formMessage.classList.remove('error');
+                }, 3000);
                 return;
             }
 
@@ -82,23 +88,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
             
-            // ⬇️⬇️⬇️ ¡CORRECCIÓN CRÍTICA! ⬇️⬇️⬇️
             // Añadimos la acción que la API (Código.gs) espera.
             data.action = 'submit_lead';
 
             try {
-                // Usamos 'cors' porque la API Unificada sí devuelve JSON.
-                // 'no-cors' era para el script simple.
                 const response = await fetch(GOOGLE_SCRIPT_ENDPOINT, {
                     method: 'POST',
-                    mode: 'cors', // Cambiado a 'cors'
+                    mode: 'cors', // Necesario para API de Google Script
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                     body: new URLSearchParams(data).toString()
                 });
 
-                // Leemos la respuesta de la API
                 const result = await response.json();
 
                 if (result.success) {
@@ -122,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(() => {
                          formMessage.classList.remove('success', 'error');
                          formMessage.textContent = '';
-                    }, 3000);
+                    }, 3000); // Limpia el mensaje después de 3 segundos
                 }, 500);
             }
         });
@@ -147,6 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         slides.forEach((slide, i) => {
              slide.classList.remove('active');
+             // Usamos 'transform' para el efecto de deslizamiento (requiere CSS)
              slide.style.transform = `translateX(${(i - index) * 100}%)`;
         });
         
@@ -164,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function startSlideShow() {
         clearInterval(slideInterval); 
-        slideInterval = setInterval(nextSlide, 7000); 
+        slideInterval = setInterval(nextSlide, 7000); // Cambia slide cada 7 segundos
     }
     
     if (slides.length > 0) {
@@ -175,10 +178,11 @@ document.addEventListener('DOMContentLoaded', () => {
             dot.addEventListener('click', () => {
                 const index = parseInt(dot.getAttribute('data-slide'));
                 showSlide(index);
-                startSlideShow(); 
+                startSlideShow(); // Reinicia el timer al hacer clic manual
             });
         });
 
+        // Pausar al poner el mouse encima
         const carouselContainer = document.querySelector('.value-carousel-container');
         if (carouselContainer) {
             carouselContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
