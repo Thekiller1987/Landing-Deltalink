@@ -1,9 +1,10 @@
-/* Archivo: scripts.js - CORREGIDO con Validación de Teléfono */
+/* Archivo: scripts.js (Landing Page) - CORREGIDO PARA ENVIAR LA ACCIÓN */
 
 // =======================================================
-// 1. CONFIGURACIÓN DEL FORMULARIO Y VALIDACIÓN
+// 1. CONFIGURACIÓN DEL FORMULARIO Y API UNIFICADA
 // =======================================================
 
+// 🌟 URL DE API UNIFICADA DEL USUARIO (¡LISTA PARA USAR!) 🌟
 const GOOGLE_SCRIPT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbx8yPloexKjU6mEXyJR5YxgAoMKdvYrekWVxtm1aGqHOAHxg3IjnIGRJAkiKfoCR2XUUg/exec'; 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contact-form');
     const formMessage = document.getElementById('form-message');
     const submitButton = form ? form.querySelector('.submit-btn') : null;
-    const telefonoInput = document.getElementById('telefono'); // Nuevo ID añadido al HTML
+    const telefonoInput = document.getElementById('telefono');
     const mainNav = document.querySelector('nav');
     const hamburgerBtn = document.querySelector('.hamburger-menu');
 
@@ -44,40 +45,31 @@ document.addEventListener('DOMContentLoaded', () => {
     if (telefonoInput) {
         telefonoInput.addEventListener('input', (e) => {
             let value = e.target.value;
-            
-            // 1. Permite solo números y '+'
             value = value.replace(/[^0-9+]/g, '');
-
-            // 2. Si empieza con '+', asegura que solo haya uno al inicio
             if (value.startsWith('+')) {
-                // Mantiene el primer '+' y elimina cualquier otro '+' subsiguiente
                 value = '+' + value.substring(1).replace(/\+/g, '');
             } else {
-                 // Si el usuario no puso '+' al inicio, solo deja dígitos
                  value = value.replace(/\+/g, '');
             }
-            
             e.target.value = value;
         });
     }
 
 
     // ------------------------------------
-    // Envío del Formulario
+    // Envío del Formulario (¡AQUÍ ESTÁ LA CORRECCIÓN!)
     // ------------------------------------
     if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // Re-validación del formato aquí (aunque HTML pattern ayuda)
             if (telefonoInput && !telefonoInput.checkValidity()) {
                 formMessage.textContent = 'Por favor, revise el formato del teléfono.';
                 formMessage.classList.add('error');
                 setTimeout(() => formMessage.classList.remove('error'), 3000);
-                return; // Detener el envío si el patrón no se cumple
+                return;
             }
 
-            // Estado de envío
             submitButton.textContent = 'Enviando...';
             submitButton.disabled = true;
             formMessage.textContent = '';
@@ -85,20 +77,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
+            
+            // ⬇️⬇️⬇️ ¡CORRECCIÓN CRÍTICA! ⬇️⬇️⬇️
+            // Añadimos la acción que la API (Código.gs) espera.
+            data.action = 'submit_lead';
 
             try {
+                // Usamos 'cors' porque la API Unificada sí devuelve JSON.
+                // 'no-cors' era para el script simple.
                 const response = await fetch(GOOGLE_SCRIPT_ENDPOINT, {
                     method: 'POST',
-                    mode: 'no-cors', 
+                    mode: 'cors', // Cambiado a 'cors'
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                     body: new URLSearchParams(data).toString()
                 });
 
-                formMessage.textContent = '¡Mensaje enviado con éxito! Le contactaremos pronto.';
-                formMessage.classList.add('success');
-                form.reset(); 
+                // Leemos la respuesta de la API
+                const result = await response.json();
+
+                if (result.success) {
+                    formMessage.textContent = '¡Mensaje enviado con éxito! Le contactaremos pronto.';
+                    formMessage.classList.add('success');
+                    form.reset(); 
+                } else {
+                    // Muestra el error de la API (ej: "Faltan datos requeridos")
+                    formMessage.textContent = result.message || 'Error al enviar el formulario.';
+                    formMessage.classList.add('error');
+                }
 
             } catch (error) {
                 console.error('Error de red o CORS al enviar el formulario:', error);
@@ -126,6 +133,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let slideInterval;
 
     function showSlide(index) {
+        if (slides.length === 0) return; // Evitar errores si no hay slides
+
         if (index >= slides.length) {
             index = 0;
         } else if (index < 0) {
