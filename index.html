@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DELTALINK - Socio Tecnológico Integral y Seguro</title>
+    <title>DELTALINK - Su Socio Tecnológico Estratégico | Ciberseguridad y Crecimiento Inteligente</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
@@ -144,15 +144,27 @@
             </div>
         </div>
         
-        <form id="contact-form" class="contact-form" data-aos="zoom-in" data-aos-delay="500">
-            <input type="text" name="nombre" placeholder="Nombre" required>
-            <input type="text" name="empresa" placeholder="Empresa o Institución para la que trabaja" required>
-            <input type="email" name="email" placeholder="Correo Electrónico" required>
-            <input type="tel" name="telefono" placeholder="Teléfono de Contacto (ej: +505 8888 7777)" required>
-            <textarea name="mensaje" placeholder="Describa brevemente su necesidad (Software a medida, Soporte de Infraestructura, Ciberseguridad, etc.)" required></textarea>
-            <button type="submit" class="submit-btn">Enviar Solicitud</button>
-            <div id="form-message" class="form-message"></div>
-        </form>
+  <form id="contact-form" class="contact-form" data-aos="zoom-in" data-aos-delay="500">
+    <input type="text" name="nombre" placeholder="Nombre" required>
+    <input type="text" name="empresa" placeholder="Empresa o Institución para la que trabaja" required>
+    
+    <input type="email" name="email" placeholder="Correo Electrónico" required>
+    
+    <input 
+        type="tel" 
+        name="telefono" 
+        placeholder="Teléfono (ej: +505 8888 7777)" 
+        required
+        pattern="^\+?\d{9,15}$" 
+        title="El teléfono debe empezar opcionalmente con '+' seguido de 9 a 15 dígitos. Ej: +505 8888 7777"
+        oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\+(.*)\+)/g, '$1')"
+        id="telefono"
+    >
+    
+    <textarea name="mensaje" placeholder="Describa brevemente su necesidad (Software a medida, Soporte de Infraestructura, Ciberseguridad, etc.)" required></textarea>
+    <button type="submit" class="submit-btn">Enviar Solicitud</button>
+    <div id="form-message" class="form-message"></div>
+</form>
     </section>
 
     <footer>
@@ -184,8 +196,8 @@
     </footer>
 
     <script src="scripts.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // AOS initialization
         AOS.init({
             duration: 1200, 
             once: true,    
@@ -193,27 +205,14 @@
         });
 
         // Sticky Header con sombra
-        document.addEventListener('DOMContentLoaded', () => {
-             const header = document.getElementById('main-header');
-             const mainNav = document.querySelector('nav');
-             const hamburgerBtn = document.querySelector('.hamburger-menu');
-             
-             // Toggle para el menú hamburguesa
-             hamburgerBtn.addEventListener('click', () => {
-                 mainNav.classList.toggle('active');
-                 hamburgerBtn.classList.toggle('active');
-             });
-
-             // Sticky Header
-             window.addEventListener('scroll', function() {
-                 if (window.scrollY > 50) { 
-                     header.classList.add('scrolled');
-                 } else {
-                     header.classList.remove('scrolled');
-                 }
-             });
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         });
     </script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </body>
 </html>
