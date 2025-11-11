@@ -57,11 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let formatted = '';
             
-            // 2. Aplicar formato +505
+            // 2. Aplicar formato +505 (Añade el espacio)
             if (cleaned.startsWith('+505')) {
                 formatted = '+505';
                 if (cleaned.length > 4) {
-                    // Añadir espacio y limitar a 8 dígitos
+                    // Añadir espacio y limitar a 8 dígitos después
                     formatted += ' ' + cleaned.substring(4, 12);
                 }
             } 
@@ -88,13 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // 3. Validación final antes de enviar
             if (telefonoInput && !telefonoInput.checkValidity()) {
-                formMessage.textContent = 'Formato de teléfono inválido. Use 8 dígitos, o +505 88887777, o un código de país.';
-                formMessage.className = 'form-message error visible';
-                formMessage.style.display = 'block';
-                setTimeout(() => {
-                    formMessage.classList.remove('visible');
-                    setTimeout(() => formMessage.style.display = 'none', 300);
-                }, 4000);
+                // El 'title' del HTML se mostrará automáticamente
+                // Pero añadimos un mensaje extra
+                showMessage('form-message', 'Formato de teléfono inválido. Revise el campo.', 'error');
                 return;
             }
 
