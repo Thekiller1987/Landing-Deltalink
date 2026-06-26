@@ -4,9 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DELTALINK - Su Socio Tecnológico Estratégico | Ciberseguridad y Crecimiento Inteligente</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="DELTALINK - Soluciones tecnológicas integrales y seguras en Nicaragua. Desarrollo de software a la medida (ERP, CRM, POS), ciberseguridad avanzada con DevSecOps, infraestructura de redes y servidores cloud, y mantenimiento preventivo proactivo.">
+    <meta name="keywords" content="ciberseguridad, desarrollo de software nicaragua, infraestructura it, mantenimiento de servidores, redes informaticas, devsecops, deltalink, juigalpa, chontales">
+    <meta name="author" content="DELTALINK">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="DELTALINK - Su Socio Tecnológico Estratégico | Ciberseguridad y Crecimiento Inteligente">
+    <meta property="og:description" content="Software a la medida, ciberseguridad proactiva e infraestructura robusta en Nicaragua para garantizar la continuidad y el crecimiento inteligente de su negocio.">
+    <meta property="og:image" content="logo.png">
+    <meta property="og:url" content="https://www.deltalink.dev">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DELTALINK - Su Socio Tecnológico Estratégico">
+    <meta name="twitter:description" content="Transformación digital sin riesgos con software a medida, ciberseguridad e infraestructura llave en mano.">
+    <meta name="twitter:image" content="logo.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    
+    <!-- Fonts & Stylesheets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=League+Spartan:wght@700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
@@ -17,9 +43,10 @@
         </div>
         <nav>
             <a href="#home">Inicio</a>
-            <a href="#solucion">Nuestra Solución</a>
+            <a href="#solucion">Plataforma</a>
             <a href="#valor">Valor Diferencial</a>
-            <a href="#testimonios">Testimonios</a>
+            <a href="#comparativa">Diferencia</a>
+            <a href="#faqs">Preguntas</a>
             <a href="#contacto" class="contact-btn">Contáctenos</a>
         </nav>
         <button class="hamburger-menu" aria-label="Abrir menú">
@@ -30,13 +57,54 @@
     </header>
 
     <section class="hero-section" id="home">
+        <!-- Glowing background blobs -->
+        <div class="glowing-blob blob-1"></div>
+        <div class="glowing-blob blob-2"></div>
+        
         <div class="hero-content">
             <h1 class="animated-headline" data-aos="fade-up"><strong>DELTALINK:</strong> Ciberseguridad Robusta y Crecimiento Inteligente.</h1>
             <p class="animated-subtitle" data-aos="fade-up" data-aos-delay="200">Su Socio Tecnológico Integral para la <strong>Transformación Digital</strong> sin riesgos.</p>
-            <p class="animated-text" data-aos="fade-up" data-aos-delay="400">Desde Software a Medida hasta Infraestructura Llave en Mano y Continuidad del Negocio.</p>
-            <a href="#contacto" class="cta-button" data-aos="zoom-in" data-aos-delay="600">Transforme su Negocio Ahora</a>
+            <p class="animated-text" data-aos="fade-up" data-aos-delay="400">Desde Software a Medida hasta Infraestructura Llave en Mano y Continuidad de Negocio.</p>
+            <div class="hero-buttons" data-aos="zoom-in" data-aos-delay="600">
+                <a href="#contacto" class="cta-button">Transforme su Negocio Ahora</a>
+                <a href="#solucion" class="cta-secondary-button">Conocer Plataforma</a>
+            </div>
         </div>
         <div class="animated-bg"></div>
+    </section>
+
+    <!-- Stats Bar Section -->
+    <section class="stats-bar-section">
+        <div class="stats-container">
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-shield-halved stat-icon"></i>
+                <div class="stat-info">
+                    <h3 class="stat-number">100%</h3>
+                    <p class="stat-label">Ciberseguridad</p>
+                </div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-handshake stat-icon"></i>
+                <div class="stat-info">
+                    <h3 class="stat-number">1</h3>
+                    <p class="stat-label">Solo Proveedor</p>
+                </div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-cloud stat-icon"></i>
+                <div class="stat-info">
+                    <h3 class="stat-number">99.9%</h3>
+                    <p class="stat-label">Uptime Cloud</p>
+                </div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+                <i class="fas fa-database stat-icon"></i>
+                <div class="stat-info">
+                    <h3 class="stat-number">0%</h3>
+                    <p class="stat-label">Pérdida de Datos</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="integrated-solution-section" id="solucion">
@@ -58,23 +126,32 @@
     </section>
 
     <section class="differential-value-section" id="valor">
+        <div class="glowing-blob blob-3"></div>
         <h2 data-aos="fade-up">Nuestro Valor Diferencial: La Ventaja DELTALINK</h2>
-        <div class="value-carousel-container">
-            <div class="carousel-slide active" data-index="0" data-aos="fade-up">
-                <i class="fas fa-handshake-alt-slash icon-large"></i>
-                <h3>Implementación Llave en Mano</h3>
-                <p>Olvide la complejidad de gestionar múltiples proveedores. <strong>DELTALINK es su único punto de contacto</strong>. Desde la consultoría inicial hasta la instalación de hardware, el despliegue de software y la capacitación, le entregamos soluciones <strong>completamente funcionales y listas para operar</strong>.</p>
+        <div class="carousel-wrapper" data-aos="fade-up" data-aos-delay="200">
+            <button class="carousel-nav-btn prev-btn" aria-label="Slide anterior">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="value-carousel-container">
+                <div class="carousel-slide active" data-index="0">
+                    <i class="fas fa-handshake icon-large"></i>
+                    <h3>Implementación Llave en Mano</h3>
+                    <p>Olvide la complejidad de gestionar múltiples proveedores. <strong>DELTALINK es su único punto de contacto</strong>. Desde la consultoría inicial hasta la instalación de hardware, el despliegue de software y la capacitación, le entregamos soluciones <strong>completamente funcionales y listas para operar</strong>.</p>
+                </div>
+                <div class="carousel-slide" data-index="1">
+                    <i class="fas fa-shield-alt icon-large"></i>
+                    <h3>Ciberseguridad como Eje Central (DevSecOps)</h3>
+                    <p>La seguridad no es un añadido, es nuestra <strong>filosofía fundamental</strong>. Aplicamos <strong>DevSecOps</strong> para blindar sus sistemas y sitios web desde el código fuente, eliminando vulnerabilidades y protegiendo sus activos digitales contra las amenazas más sofisticadas. Su negocio, <strong>totalmente protegido</strong>.</p>
+                </div>
+                <div class="carousel-slide" data-index="2">
+                    <i class="fas fa-chart-line icon-large"></i>
+                    <h3>Ingreso Recurrente y Crecimiento Sostenible</h3>
+                    <p>Construimos relaciones a largo plazo. A través de nuestros planes de <strong>Mantenimiento Preventivo Proactivo</strong> y servicios de hosting en la nube ($12 USD/mes), garantizamos la <strong>continuidad y optimización</strong> de su negocio, permitiéndole un crecimiento constante y sin interrupciones.</p>
+                </div>
             </div>
-            <div class="carousel-slide" data-index="1" data-aos="fade-up" data-aos-delay="100">
-                <i class="fas fa-shield-alt icon-large"></i>
-                <h3>Ciberseguridad como Eje Central (DevSecOps)</h3>
-                <p>La seguridad no es un añadido, es nuestra <strong>filosofía fundamental</strong>. Aplicamos <strong>DevSecOps</strong> para blindar sus sistemas y sitios web desde el código fuente, eliminando vulnerabilidades y protegiendo sus activos digitales contra las amenazas más sofisticadas. Su negocio, <strong>totalmente protegido</strong>.</p>
-            </div>
-            <div class="carousel-slide" data-index="2" data-aos="fade-up" data-aos-delay="200">
-                <i class="fas fa-chart-line icon-large"></i>
-                <h3>Ingreso Recurrente y Crecimiento Sostenible</h3>
-                <p>Construimos relaciones a largo plazo. A través de nuestros planes de <strong>Mantenimiento Preventivo Proactivo</strong> y servicios de hosting en la nube ($12 USD/mes), garantizamos la <strong>continuidad y optimización</strong> de su negocio, permitiéndole un crecimiento constante y sin interrupciones.</p>
-            </div>
+            <button class="carousel-nav-btn next-btn" aria-label="Siguiente slide">
+                <i class="fas fa-chevron-right"></i>
+            </button>
         </div>
         <div class="carousel-dots">
             <span class="dot active" data-slide="0"></span>
@@ -99,20 +176,129 @@
         </div>
     </section>
 
-    <section class="testimonials-section" id="testimonios">
-        <h2 data-aos="fade-up">Lo Que Dicen Nuestros Clientes</h2>
-        <div class="testimonial-grid">
-            <div class="testimonial-card" data-aos="zoom-in" data-aos-delay="100">
-                <p>"DELTALINK ha transformado nuestra operación. Su software a medida es intuitivo y la seguridad es impecable. ¡Un verdadero socio estratégico!"</p>
-                <h4>— Gerente de Operaciones, Agroindustria X</h4>
+    <!-- Comparativa Section -->
+    <section class="comparativa-section" id="comparativa">
+        <div class="glowing-blob blob-2" style="top: 40%; left: 80%;"></div>
+        <h2 data-aos="fade-up">¿Cómo mejoramos tu negocio?</h2>
+        <p class="comparativa-subtitle" data-aos="fade-up" data-aos-delay="100">Compara el enfoque tradicional con la ventaja tecnológica de DELTALINK.</p>
+        
+        <div class="comparativa-container" data-aos="fade-up" data-aos-delay="200">
+            <div class="comparativa-table">
+                <!-- Header -->
+                <div class="comp-row comp-header">
+                    <div class="comp-cell cell-aspect">Aspecto Crítico</div>
+                    <div class="comp-cell cell-traditional">Enfoque Tradicional / Otros</div>
+                    <div class="comp-cell cell-deltalink">Diferencia DELTALINK</div>
+                </div>
+                
+                <!-- Row 1: Ciberseguridad -->
+                <div class="comp-row">
+                    <div class="comp-cell cell-aspect">
+                        <i class="fas fa-shield-halved"></i>
+                        <span>Ciberseguridad</span>
+                    </div>
+                    <div class="comp-cell cell-traditional">
+                        <span class="badge badge-negative"><i class="fas fa-xmark"></i> Reactiva</span>
+                        <p>Parches y defensas después de sufrir ataques. Pérdida inminente de datos.</p>
+                    </div>
+                    <div class="comp-cell cell-deltalink">
+                        <span class="badge badge-positive"><i class="fas fa-check"></i> Proactiva (DevSecOps)</span>
+                        <p>Seguridad integrada desde el código fuente. Sistemas blindados y blindaje activo de datos.</p>
+                    </div>
+                </div>
+                
+                <!-- Row 2: Gestión de Proveedores -->
+                <div class="comp-row">
+                    <div class="comp-cell cell-aspect">
+                        <i class="fas fa-network-wired"></i>
+                        <span>Gestión y IT</span>
+                    </div>
+                    <div class="comp-cell cell-traditional">
+                        <span class="badge badge-negative"><i class="fas fa-xmark"></i> Fraccionada</span>
+                        <p>Tratar con múltiples proveedores (software, hardware, hosting). Conflictos y demoras.</p>
+                    </div>
+                    <div class="comp-cell cell-deltalink">
+                        <span class="badge badge-positive"><i class="fas fa-check"></i> Unificada (Llave en Mano)</span>
+                        <p>Un solo punto de contacto para desarrollo, infraestructura y despliegue cloud. Cero dolores de cabeza.</p>
+                    </div>
+                </div>
+                
+                <!-- Row 3: Continuidad del Negocio -->
+                <div class="comp-row">
+                    <div class="comp-cell cell-aspect">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Continuidad</span>
+                    </div>
+                    <div class="comp-cell cell-traditional">
+                        <span class="badge badge-negative"><i class="fas fa-xmark"></i> Correctiva</span>
+                        <p>Actuar cuando el sistema ya cayó. Pérdida de dinero por inactividad.</p>
+                    </div>
+                    <div class="comp-cell cell-deltalink">
+                        <span class="badge badge-positive"><i class="fas fa-check"></i> Preventiva Proactiva</span>
+                        <p>Monitoreo preventivo continuo para asegurar que sus plataformas nunca se detengan.</p>
+                    </div>
+                </div>
+                
+                <!-- Row 4: Hosting y Datos -->
+                <div class="comp-row">
+                    <div class="comp-cell cell-aspect">
+                        <i class="fas fa-database"></i>
+                        <span>Hosting y Datos</span>
+                    </div>
+                    <div class="comp-cell cell-traditional">
+                        <span class="badge badge-negative"><i class="fas fa-xmark"></i> Básico</span>
+                        <p>Hosting genérico sin copias de seguridad garantizadas ni soporte de respuesta.</p>
+                    </div>
+                    <div class="comp-cell cell-deltalink">
+                        <span class="badge badge-positive"><i class="fas fa-check"></i> Cloud Seguro</span>
+                        <p>Servidores optimizados con backups automáticos diarios e infraestructura de alta disponibilidad.</p>
+                    </div>
+                </div>
             </div>
-            <div class="testimonial-card" data-aos="zoom-in" data-aos-delay="300">
-                <p>"La implementación de nuestra nueva infraestructura fue perfecta. Cero interrupciones y un soporte técnico inigualable. Los recomendamos ampliamente."</p>
-                <h4>— Director General, Cadena de Tiendas Z</h4>
+        </div>
+    </section>
+
+    <!-- FAQs Section -->
+    <section class="faqs-section" id="faqs">
+        <div class="glowing-blob blob-4"></div>
+        <h2 data-aos="fade-up">Preguntas Frecuentes</h2>
+        <p class="faqs-subtitle" data-aos="fade-up" data-aos-delay="100">Resolvemos sus dudas principales sobre nuestros servicios y metodologías.</p>
+        <div class="faqs-container" data-aos="fade-up" data-aos-delay="200">
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>¿Qué es la metodología DevSecOps y por qué la usan?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>DevSecOps significa integrar la seguridad en cada fase del desarrollo de software. En lugar de verificar la seguridad al final, nosotros blindamos el código, realizamos pruebas de vulnerabilidades automáticas y configuramos defensas desde el primer día. Esto reduce costos y evita ciberataques futuros en sus plataformas web y sistemas de gestión.</p>
+                </div>
             </div>
-            <div class="testimonial-card" data-aos="zoom-in" data-aos-delay="500">
-                <p>"Finalmente, una empresa que entiende la ciberseguridad desde la raíz. Nos sentimos completamente seguros y enfocados en crecer."</p>
-                <h4>— CTO, Fintech Solutions Y</h4>
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>¿Qué incluye una "Implementación Llave en Mano"?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Incluye todo el ciclo tecnológico: consultoría técnica inicial, adquisición y configuración de servidores o computadoras, desarrollo de software personalizado, cableado y configuración de redes, despliegue en la nube, y capacitación completa a su personal. Nosotros nos encargamos de toda la complejidad para que usted reciba una solución lista para facturar y trabajar.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>¿Ofrecen soporte y mantenimiento post-despliegue?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Sí, ofrecemos planes de Mantenimiento Preventivo Proactivo y soporte 24/7. Monitoreamos constantemente el rendimiento de sus servidores, realizamos respaldos automáticos de su base de datos y actualizamos los parches de seguridad para evitar caídas del sistema o pérdida de información crítica.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>¿Tengo que contratar servidores o hosting por mi cuenta?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>No es necesario. En DELTALINK proporcionamos servicios de hosting y servidores en la nube de alta disponibilidad y rendimiento optimizado desde $12 USD/mes. Administramos todo el entorno cloud por usted, garantizando copias de seguridad diarias y seguridad perimetral.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -135,7 +321,7 @@
             <div class="contact-item" data-aos="fade-up" data-aos-delay="300">
                 <i class="fas fa-phone-alt"></i>
                 <h3>Teléfono</h3>
-                <p>+505 5850 6295</p>
+                <p>+505 8403 1936</p>
             </div>
             <div class="contact-item" data-aos="fade-left" data-aos-delay="400">
                 <i class="fas fa-map-marker-alt"></i>
@@ -150,16 +336,13 @@
     
     <input type="email" name="email" placeholder="Correo Electrónico" required>
     
-  <input 
-    type="tel" 
-    name="telefono" 
-    placeholder="+505 88887777" 
-    required
-    pattern="^\+505 \d{8}$" 
-    title="El formato debe ser: +505 seguido de un espacio y 8 dígitos."
-    maxlength="13" 
-    id="telefono"
->
+    <input 
+      type="tel" 
+      name="telefono" 
+      placeholder="Teléfono (ej: 8888 7777)" 
+      required
+      id="telefono"
+    >
     
     <textarea name="mensaje" placeholder="Describa brevemente su necesidad (Software a medida, Soporte de Infraestructura, Ciberseguridad, etc.)" required></textarea>
     <button type="submit" class="submit-btn">Enviar Solicitud</button>
@@ -177,9 +360,10 @@
                 <h4>Enlaces Rápidos</h4>
                 <ul>
                     <li><a href="#home">Inicio</a></li>
-                    <li><a href="#solucion">Nuestra Solución</a></li>
+                    <li><a href="#solucion">Plataforma</a></li>
                     <li><a href="#valor">Valor Diferencial</a></li>
-                    <li><a href="#testimonios">Testimonios</a></li>
+                    <li><a href="#comparativa">Diferencia</a></li>
+                    <li><a href="#faqs">Preguntas Frecuentes</a></li>
                     <li><a href="#contacto">Contáctenos</a></li>
                 </ul>
             </div>
@@ -214,5 +398,11 @@
             }
         });
     </script>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/50584031936?text=Hola%20DELTALINK,%20estoy%20interesado%20en%20solicitar%20informaci%C3%B3n%20sobre%20sus%20servicios%20tecnol%C3%B3gicos." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Contáctenos por WhatsApp</span>
+    </a>
 </body>
 </html>
